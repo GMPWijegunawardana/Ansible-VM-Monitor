@@ -1,66 +1,51 @@
-# Ansible VM Monitor
+# 🖥️ Ansible VM Monitor
 
-Ansible-VM-Monitor is a project for automated monitoring of virtual machines (VMs) health and generating reports via Ansible. It streamlines collecting metrics, alerting/reporting, and can be customized for different VM environments.
+**Ansible-VM-Monitor** is an automation project designed to monitor the health of Virtual Machines (VMs) and generate system reports using **Ansible playbooks**.  
+It simplifies **infrastructure monitoring** by automating the collection of key system metrics (CPU, memory, disk, and network usage) and delivering reports to administrators.  
 
----
-
-## Table of Contents
-
-- [Features](#features)  
-- [Architecture / Components](#architecture--components)  
-- [Requirements](#requirements)  
-- [Setup & Installation](#setup--installation)  
-- [Usage](#usage)  
-- [Configuration](#configuration)  
-- [How It Works](#how-it-works)  
-- [Contributing](#contributing)  
-- [License](#license)  
+This project demonstrates how **Infrastructure as Code (IaC)** tools like Ansible can go beyond provisioning and configuration to handle **monitoring and operational workflows**.
 
 ---
 
-## Features
+## 🚀 Why This Project?
 
-- Automatically collect VM health metrics (CPU, memory, disk, network, etc.)  
-- Send periodic reports (e.g. via email or other channels)  
-- Modular playbooks to separate concerns – collecting data, formatting, sending reports  
-- Flexible configuration via Ansible inventory / group_vars  
-- Template support for customizing report format  
+Manual VM monitoring can be tedious, error-prone, and inconsistent.  
+With Ansible, we can:
 
----
+- Automate repetitive monitoring tasks
+- Run on any number of VMs in parallel
+- Standardize the way reports are generated and delivered
+- Easily extend functionality with new playbooks, roles, or templates
 
-## Architecture / Components
-
-The project includes the following main components:
-
-| Component | Purpose |
-|-----------|---------|
-| `collect_metrics.yaml` | Gathers metrics from target VMs (e.g. system load, disk usage, memory) |
-| `send_report.yaml` | Takes the collected data and sends out a report |
-| `playbook.yaml` | Top-level orchestrator playbook that ties together collection & report sending |
-| `ansible.cfg` | Configuration file for Ansible, e.g. settings for inventory, roles, etc. |
-| `inventory/` | List of hosts / VMs to monitor |
-| `group_vars/` | Variables per group (or host) for customizing behavior per environment |
-| `templates/` | Jinja2 templates for formatting reports (e.g. HTML, text) |
-| Documentation (Steps Doc) | Describes how to set up, run, maintain the monitor |
+This project is also a **practical showcase of DevOps & Ansible skills** for infrastructure automation.
 
 ---
 
-## Requirements
+## ✨ Features
 
-To use this project, you will need:
-
-- Ansible (version **2.x** or newer)  
-- SSH access to VMs with appropriate user / privileges  
-- Python and required libraries on VMs (if using any collector scripts)  
-- Mail system / other transport (if reports are emailed)  
-- Inventory file set properly (defining groups/hosts)  
+- 🔍 **Collect VM Metrics**: CPU load, memory usage, disk utilization, and network stats  
+- 📑 **Custom Reports**: Generate reports using Jinja2 templates (text/HTML formats)  
+- 📧 **Automated Delivery**: Send reports via email (or extend to Slack, PagerDuty, etc.)  
+- ⚡ **Agentless Setup**: Uses Ansible over SSH – no agent required on VMs  
+- 🔧 **Configurable Thresholds**: Define alert levels for CPU, memory, or disk usage  
+- 🧩 **Modular Design**: Separate playbooks for collection, reporting, and sending  
 
 ---
 
-## Setup & Installation
+## 🏗️ Project Structure
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/jaiswaladi246/Ansible-VM-Monitor.git
-   cd Ansible-VM-Monitor
+```bash
+Ansible-VM-Monitor/
+├── ansible.cfg            # Ansible configuration file
+├── inventory/             # Define VM hosts and groups
+│   └── hosts.ini
+├── group_vars/            # Group/host-specific variables
+│   └── all.yaml
+├── playbook.yaml          # Main playbook (orchestrator)
+├── collect_metrics.yaml   # Playbook to gather VM stats
+├── send_report.yaml       # Playbook to send reports
+├── templates/             # Jinja2 templates for reports
+│   └── report_template.j2
+├── docs/                  # Documentation files
+│   └── setup_steps.md
+└── README.md              # Project documentation
